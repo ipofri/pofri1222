@@ -3,6 +3,12 @@
 int a, b, d, N;
 int DP[10000 + 10];
 
+int reArr(int n)
+{
+	int result = (n + 10000 + 1) % (10000 + 1);
+	return result;
+}
+
 int main(void)
 {
 	freopen("in.txt", "r", stdin);
@@ -10,30 +16,30 @@ int main(void)
 	scanf("%d %d %d %d", &a, &b, &d, &N);
 
 	DP[0] = 1;
-	int temp;
+	int idx = 0;
+	int subSum = 0;
+
 	for (int i = 1; i <= N; i++)
 	{
-		temp = 0;
-		for (int j = d; j > 0; j--)
-		{
-			DP[j] = DP[j-1];
-			if (j < b && j >= a)
-			{
-				temp += DP[j];
-				temp %= 1000;
-			}
-		}
+		idx = reArr(idx - 1);
 
-		DP[0] = temp;
-		DP[d] = 0;
+		DP[reArr(idx + d)] = 0;
+		int j = DP[reArr(idx + a)];
+		int k = DP[reArr(idx + b)];
 
+		subSum -= k;
+		subSum += j;
+
+		DP[idx] = subSum%1000;
 	}
 
 	int sum = 0;
-	for (int i = 0; i < d; i++)
+	int target = reArr(idx + d);
+	while (idx != target)
 	{
-		sum += DP[i];
+		sum += DP[idx];
 		sum %= 1000;
+		idx = reArr(++idx);
 	}
 
 	printf("%d", sum);
