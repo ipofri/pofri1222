@@ -3,49 +3,61 @@
 
 #include <stdio.h>
 
-int B1, B2, B3;
+int B1, B2, B3, BL[3];
 int K1, K2;
 
 int A = 0;
 int B = 1;
-int DP[2][500 + 10];
+int DP[2][500 + 10][500+10];
 
 void initial()
 {
 	for (int i = 0; i < 500 + 10; i++)
 	{
-		DP[A][i] = -1;
-		DP[B][i] = -1;
+		for (int j = 0; j < 500 + 10; j++)
+		{
+			DP[0][i][j] = -1;
+			DP[1][i][j] = -1;
+		}
 	}
 }
 
 int do_DP(int turn, int a, int b)
 {
-	int ret = A;
-
-	if ( (a>= B1 && a - B1 < B1)
-		|| (a >= B2 && a - B2 < B1)
-		|| (a >= B3 && a - B3 < B1) )
+	//init condition
+	int flag = 0;
+	for (int i = 0; i < 3; i++)
 	{
-		ret = turn;
+		if (a - BL[i] >= 0)
+			flag = 1;
+		if (b - BL[i] >= 0)
+			flag = 1;
 	}
-	else
-	{
-		int c1 = 1 - turn;
-		if (a - B1 >= 0)
-			c1 = do_DP(1 - turn, a - B1, b);
-		int c2 = 1 - turn;
-		if (a - B2 >= 0)
-			c2 = do_DP(1 - turn, a - B2, b);
-		int c3 = 1 - turn;
-		if (a - B3 >= 0)
-			c3 = do_DP(1 - turn, a - B3, b);
+	if (flag == 0)
+		return 1 - turn;
 
-		if (c1 == turn || c2 == turn || c3 == turn)
-			ret = turn;
-		else
-			ret = 1- turn;
+	//DP condition
+	if (DP[turn][a][b] != -1)
+		return DP[turn][a][b];
+
+	int condition[6];
+
+	int ret;
+	for (int i = 0; i < 3; i++)
+	{
+		ret = 1 - turn;
+		if (a - BL[i] >= 0)
+			ret = do_DP(1 - turn, a - BL[i], b);
+		if (ret == turn)
+			break;
+		if (b - BL[i] >= 0)
+			ret = do_DP(1 - turn, a, b - BL[i]);
+		if (ret == turn)
+			break;
 	}
+
+	//DP assign
+	DP[turn][a][b] = ret;
 
 	return ret;
 }
@@ -61,8 +73,8 @@ int main(void)
 {
 	freopen("in.txt", "r", stdin);
 
-	scanf("%d %d %d", &B1, &B2, &B3);
-	for (int i = 0; i < 7; i++)
+	scanf("%d %d %d", &BL[0], &BL[1], &BL[2]);
+	for (int i = 0; i < 5; i++)
 	{
 		scanf("%d %d", &K1, &K2);
 
