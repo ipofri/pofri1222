@@ -1,0 +1,13 @@
+117 50
+
+Input Data
+117
+50
+
+
+CPU Result
+717712718
+
+
+You Result
+789219113
