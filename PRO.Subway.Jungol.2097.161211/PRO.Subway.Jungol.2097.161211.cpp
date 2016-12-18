@@ -2,7 +2,7 @@
 
 int N, M;
 int DP[100 + 10][100 + 10];
-int PATH[100 + 10][100 + 10][100 + 10];
+int PATH[100 + 10][100 + 10];
 int item[100 + 10][100 + 10];
 
 #define myMin(a,b) a>b ? b: a
@@ -17,25 +17,24 @@ int do_dp()
 		{
 			for (int j = 1; j <= N; j++)
 			{
-				int t1 = DP[i][j];
-				int t2 = item[i][k] + item[k][j];
-				if (t1 > t2)
+				if (DP[i][j] > DP[i][k] + DP[k][j])
 				{
-					DP[i][j] = t2;
-					for (int l = 1; l <= N; l++)
-					{
-						if (PATH[i][j][l] == 0)
-						{
-							PATH[i][j][l] = k;
-							break;
-						}
-					}
+					DP[i][j] = DP[i][k] + DP[k][j];
+					PATH[i][j] = k;
 				}
 			}
 		}
 	}
 
 	return ret;
+}
+
+void printpath(int s, int e)
+{
+	if (PATH[s][e] == 0) return;
+	printpath(s, PATH[s][e]);
+	printf("%d ", PATH[s][e]);
+	printpath(PATH[s][e], e);
 }
 
 int main(void)
@@ -56,8 +55,11 @@ int main(void)
 
 	printf("%d\n", DP[1][M]);
 	printf("1 ");
-	for (int i = 1; i <= N && PATH[1][M][i] != 0; i++)
-		printf("%d ", PATH[1][M][i]);
+
+	int s = 1;
+	int e = M;
+	printpath(s, e);
+		
 	printf("%d ", M);
 
 	return 0;
