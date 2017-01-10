@@ -61,6 +61,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AD.ImageRestore.161029", "A
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AD.Shelter.161217", "AD.Shelter.161217\AD.Shelter.161217.vcxproj", "{EF10A041-1683-4DF2-9BFD-648A9A546CEA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRO.MergeSort", "PRO.MergeSort\PRO.MergeSort.vcxproj", "{BEDFA6E5-1AE2-4D67-95CA-CCBA4033ABA9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRO.FindPath.Jungol.1677.170108", "PRO.FindPath.Jungol.1677.170108\PRO.FindPath.Jungol.1677.170108.vcxproj", "{AD96177D-C352-4D21-B7D6-1CA323144932}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRO.PanBalance.Jungol.1352.170108", "PRO.PanBalance.Jungol.1352.170108\PRO.PanBalance.Jungol.1352.170108.vcxproj", "{FAA52270-8315-48B4-BA35-4A2E61018BED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -183,6 +189,18 @@ Global
 		{EF10A041-1683-4DF2-9BFD-648A9A546CEA}.Debug|Win32.Build.0 = Debug|Win32
 		{EF10A041-1683-4DF2-9BFD-648A9A546CEA}.Release|Win32.ActiveCfg = Release|Win32
 		{EF10A041-1683-4DF2-9BFD-648A9A546CEA}.Release|Win32.Build.0 = Release|Win32
+		{BEDFA6E5-1AE2-4D67-95CA-CCBA4033ABA9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BEDFA6E5-1AE2-4D67-95CA-CCBA4033ABA9}.Debug|Win32.Build.0 = Debug|Win32
+		{BEDFA6E5-1AE2-4D67-95CA-CCBA4033ABA9}.Release|Win32.ActiveCfg = Release|Win32
+		{BEDFA6E5-1AE2-4D67-95CA-CCBA4033ABA9}.Release|Win32.Build.0 = Release|Win32
+		{AD96177D-C352-4D21-B7D6-1CA323144932}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AD96177D-C352-4D21-B7D6-1CA323144932}.Debug|Win32.Build.0 = Debug|Win32
+		{AD96177D-C352-4D21-B7D6-1CA323144932}.Release|Win32.ActiveCfg = Release|Win32
+		{AD96177D-C352-4D21-B7D6-1CA323144932}.Release|Win32.Build.0 = Release|Win32
+		{FAA52270-8315-48B4-BA35-4A2E61018BED}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FAA52270-8315-48B4-BA35-4A2E61018BED}.Debug|Win32.Build.0 = Debug|Win32
+		{FAA52270-8315-48B4-BA35-4A2E61018BED}.Release|Win32.ActiveCfg = Release|Win32
+		{FAA52270-8315-48B4-BA35-4A2E61018BED}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

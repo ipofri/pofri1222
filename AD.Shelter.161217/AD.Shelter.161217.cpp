@@ -2,8 +2,8 @@
 #include <iostream>
 #include <time.h>
 
-const int FLOOR = 1;
-const int ROOM = 10000;
+const int FLOOR = 10;
+const int ROOM = 10;
 
 void assign(int(*house)[ROOM]);
 
@@ -24,7 +24,7 @@ int main(void)
 
 		for (int j = 0; j < 3;)
 		{
-			int tmp = rand() % 10000;
+			int tmp = rand() % ROOM;
 			if (house[i][tmp] == 0)
 				continue;
 
@@ -56,14 +56,14 @@ int main(void)
 						TOTAL += abs(shelter[i][k] - j);
 					}
 					else
-						TOTAL += 10000;
+						TOTAL += ROOM;
 
 					break;
 				}
 			}
 
 			if (k == 3)
-				TOTAL += 10000;
+				TOTAL += ROOM;
 		}
 
 		int a = 0;
@@ -75,7 +75,7 @@ int main(void)
 }
 
 #define myMin(a,b) a>b ? b:a
-int SubSum[4][10001] = { 0, };
+int SubSum[4][ROOM+1] = { 0, };
 #define CalSubSum(n, a,b) SubSum[n][b] - SubSum[n][a]
 
 void assign(int(*house)[ROOM])
@@ -91,11 +91,13 @@ void assign(int(*house)[ROOM])
 				shelter[idx++] = j;
 		}
 
+		//case1
 		//for (int j = 0; j < ROOM; j++)
 		//{
 		//	house[i][j] = shelter[rand() % 3];
 		//}
 
+		//case2
 		//int sum[3] = { 0, };
 		//idx = 0;
 		//for (int j = 0; j < ROOM; j++)
@@ -109,46 +111,63 @@ void assign(int(*house)[ROOM])
 		//	house[i][j] = shelter[idx];
 		//}
 
-
-		int DP[4][10001];
+		//case3
+		int DP[4][ROOM+1];
 		DP[0][0] = 0;
 		DP[1][0] = INF;
 		DP[2][0] = INF;
 		DP[3][0] = INF;
 
 		for (int k = 0; k <= 3; k++)
-		for (int j = 1; j <= ROOM; j++)
-		{
-			if (k == 0)
-			{
-				DP[k][j] = 0;
-			}
-			else
-			{
-				SubSum[k][j] = abs(shelter[k - 1] - j) + SubSum[k][j - 1];
-				DP[k][j] = INF;
-			}
-		}
-
-		for (int k = 1; k <= 3; k++)
 		{
 			for (int j = 1; j <= ROOM; j++)
 			{
-				for (int m = 1; m <= j; m++)
+				if (k == 0)
 				{
-					int a = DP[k - 1][j - m] + CalSubSum(k, j - m, j);
-					if (a < DP[k][j])
+					DP[k][j] = 0;
+				}
+				else
+				{
+					SubSum[k][j] = abs(shelter[k - 1] - j) + SubSum[k][j - 1];
+					if (k == 1)
 					{
-						DP[k][j] = a;
+						DP[k][j] = SubSum[k][j];
 					}
-					//else
-					//{
-					//	break;
-					//}
+					else
+					{
+						DP[k][j] = INF;
+					}
+					
 				}
 			}
 		}
-		int a = 0;
+
+		int sol_arr[4][ROOM+1] = { 0, };
+		for (int k = 2; k <= 3; k++)
+		{
+			for (int to = k; to <= ROOM; to++)
+			{
+				for (int from = k; from <= to; from++)
+				{
+					int a = DP[k - 1][from-1] + CalSubSum(k, from-1, to);
+					if (a < DP[k][to])
+					{
+						DP[k][to] = a;
+						sol_arr[k][to] = from;
+					}
+					else
+					{
+						int b = 1;
+					}
+				}
+			}
+		}
+
+		int b = sol_arr[3][ROOM];
+		int a = sol_arr[2][b];
+		int c = 0;
+
+		//case4
 	}
 }
 
