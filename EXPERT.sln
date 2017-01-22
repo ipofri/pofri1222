@@ -67,6 +67,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRO.FindPath.Jungol.1677.17
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRO.PanBalance.Jungol.1352.170108", "PRO.PanBalance.Jungol.1352.170108\PRO.PanBalance.Jungol.1352.170108.vcxproj", "{FAA52270-8315-48B4-BA35-4A2E61018BED}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRO.Gene.Jungol.1701.170113", "PRO.Gene.Jungol.1701.170113\PRO.Gene.Jungol.1701.170113.vcxproj", "{D0C978CC-F9B3-42C3-960F-FD52868A913F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -201,6 +203,10 @@ Global
 		{FAA52270-8315-48B4-BA35-4A2E61018BED}.Debug|Win32.Build.0 = Debug|Win32
 		{FAA52270-8315-48B4-BA35-4A2E61018BED}.Release|Win32.ActiveCfg = Release|Win32
 		{FAA52270-8315-48B4-BA35-4A2E61018BED}.Release|Win32.Build.0 = Release|Win32
+		{D0C978CC-F9B3-42C3-960F-FD52868A913F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D0C978CC-F9B3-42C3-960F-FD52868A913F}.Debug|Win32.Build.0 = Debug|Win32
+		{D0C978CC-F9B3-42C3-960F-FD52868A913F}.Release|Win32.ActiveCfg = Release|Win32
+		{D0C978CC-F9B3-42C3-960F-FD52868A913F}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
