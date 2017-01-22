@@ -1,65 +1,90 @@
 #include <stdio.h>
 
 int N;
-int item[510];
-int DP[2][510][510];
+char item[510];
+int DP[510][510];
 
-#define myMax(a,b) a>b ? a:b
-
-int solve_dp(int n, int a_cnt, int g_cnt, int last)
+int myMax(int a, int b)
 {
-	if (n >= N)
+	if (a > b)
+		return a;
+	else
+		return b;
+}
+
+int solve_dp(int start, int end)
+{
+	if (start >= end)
 		return 0;
+
+	if (DP[start][end] != 0)
+		return DP[start][end];
 
 	int sol = 0;
 
-	for (int i = n; i < N; i++)
+	//case 1
+	if ((item[start] == 'a' && item[end] == 't') ||
+		(item[start] == 'g' && item[end] == 'c'))
 	{
-		int a, b, a_tmp, g_tmp;
-		if (item[n] == 2 || item[n] == 3)
+		sol = myMax(sol, 2 + solve_dp(start + 1, end - 1));
+	}
+
+	for (int i = start; i < end; i++)
+	{
+		sol = myMax(sol, solve_dp(start, i) + solve_dp(i + 1, end));
+	}
+
+	DP[start][end] = sol;
+
+	return sol;
+}
+
+int solve_dp2(int start, int end)
+{
+	for (int e = 2; e <= end; e++)
+	{
+		for (int s = e; s >= 1; s--)
 		{
-			item[n] == 2 ? a_tmp = a_cnt + 1 : a_tmp = a_cnt;
-			item[n] == 3 ? g_tmp = g_cnt + 1 : g_tmp = g_cnt;
-			a = 1 + solve_dp(n + 1, a_cnt + 1, g_cnt);
-			b = solve_dp(n + 1, a_cnt + 1, g_cnt);
-		}
-		else
-		{
-			item[n] == 0 ? a_tmp = a_cnt + 1 : a_tmp = a_cnt;
-			item[n] == 1 ? a_tmp = a_cnt : g_tmp = g_cnt +1;
-			a = 1 + solve_dp(n + 1, a_cnt + 1, g_cnt);
-			b = solve_dp(n + 1, a_cnt + 1, g_cnt);
+			int sol = 0;
+
+			if ((item[s] == 'a' && item[e] == 't') ||
+				(item[s] == 'g' && item[e] == 'c'))
+			{
+				sol = myMax(sol, 2 + DP[s+1][e-1]);
+			}
+
+			for (int k = s; k <= e; k++)
+			{
+				sol = myMax(sol, DP[s][k] + DP[k][e]);
+			}
+
+			DP[s][e] = sol;
 		}
 	}
 
-	return 0;
+	return DP[start][end];
 }
+
 
 int main(void)
 {
+#ifdef _WIN32
 	freopen("in.txt", "r", stdin);
+#endif
 
-	char str[510];
-	scanf("%s", str);
-
-
-	for (int i = 0;; i++)
+	scanf("%s", item+1);
+	int iend = 0;
+	for (int i = 1; i < 510; i++)
 	{
-		if (str[i] == 0)
+		if (item[i] == 0)
+		{
+			iend = i-1;
 			break;
-
-		if (str[i] == 'a')
-			item[N++] = 0;
-		else if (str[i] == 't')
-			item[N++] = 1;
-		else if (str[i] == 'g')
-			item[N++] = 2;
-		else  if (str[i] == 'c')
-			item[N++] = 3;
-
+		}
 	}
 
-	printf("%d", solve_dp(0, 0, 0, -1));
+	//printf("%d\n", solve_dp(1, iend));
+	printf("%d", solve_dp2(1, iend));
 
 	int a = 0;
 }
