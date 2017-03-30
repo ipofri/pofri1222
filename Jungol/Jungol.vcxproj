@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{9CAA7C34-04C4-4454-9782-A41AE379A1FE}</ProjectGuid>
+    <ProjectGuid>{9C3F28A6-B885-4D06-B27E-3BD531E491B0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>PRO2LineTile</RootNamespace>
+    <RootNamespace>Jungol</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -83,7 +83,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PRO.2LineTile.cpp" />
+    <ClCompile Include="Jungol.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
