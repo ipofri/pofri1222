@@ -95,6 +95,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CodeJam.Tidy.2017", "CodeJa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALG.Fence.170409", "ALG.Fence.170409\ALG.Fence.170409.vcxproj", "{D217EF90-7BA6-40FF-8F09-D1DC08D99610}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALG.TSP.170411", "ALG.TSP.170411\ALG.TSP.170411.vcxproj", "{8B5ED67E-2C4F-444B-8314-0847F8F2C946}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -285,6 +287,10 @@ Global
 		{D217EF90-7BA6-40FF-8F09-D1DC08D99610}.Debug|Win32.Build.0 = Debug|Win32
 		{D217EF90-7BA6-40FF-8F09-D1DC08D99610}.Release|Win32.ActiveCfg = Release|Win32
 		{D217EF90-7BA6-40FF-8F09-D1DC08D99610}.Release|Win32.Build.0 = Release|Win32
+		{8B5ED67E-2C4F-444B-8314-0847F8F2C946}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8B5ED67E-2C4F-444B-8314-0847F8F2C946}.Debug|Win32.Build.0 = Debug|Win32
+		{8B5ED67E-2C4F-444B-8314-0847F8F2C946}.Release|Win32.ActiveCfg = Release|Win32
+		{8B5ED67E-2C4F-444B-8314-0847F8F2C946}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
