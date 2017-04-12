@@ -97,6 +97,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALG.Fence.170409", "ALG.Fen
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALG.TSP.170411", "ALG.TSP.170411\ALG.TSP.170411.vcxproj", "{8B5ED67E-2C4F-444B-8314-0847F8F2C946}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALG.PrimeNumber.170412", "ALG.PrimeNumber.170412\ALG.PrimeNumber.170412.vcxproj", "{9A6CEF1C-1FE9-40B7-A1F9-5630848AFF4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -291,6 +293,10 @@ Global
 		{8B5ED67E-2C4F-444B-8314-0847F8F2C946}.Debug|Win32.Build.0 = Debug|Win32
 		{8B5ED67E-2C4F-444B-8314-0847F8F2C946}.Release|Win32.ActiveCfg = Release|Win32
 		{8B5ED67E-2C4F-444B-8314-0847F8F2C946}.Release|Win32.Build.0 = Release|Win32
+		{9A6CEF1C-1FE9-40B7-A1F9-5630848AFF4A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9A6CEF1C-1FE9-40B7-A1F9-5630848AFF4A}.Debug|Win32.Build.0 = Debug|Win32
+		{9A6CEF1C-1FE9-40B7-A1F9-5630848AFF4A}.Release|Win32.ActiveCfg = Release|Win32
+		{9A6CEF1C-1FE9-40B7-A1F9-5630848AFF4A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -284,7 +284,9 @@ enum tra_type
 	DEF_MODIFY,
 };
 
-pnode filter_list = NULL;
+pnode root_order = NULL;
+pnode order_list[MC];
+int gorder_idx = 1;
 void traverse_filter(pnode p, int from, int to, int opt)
 {
 	if (p == NULL)
@@ -295,7 +297,7 @@ void traverse_filter(pnode p, int from, int to, int opt)
 		traverse_filter(p->left, from, to, opt);
 	}
 
-	if (from <= p->value && p->value <= to)
+	if (from <= p->value && p->value <= to && id_list[p->id] == 0)
 	{
 		if (opt == DEF_CREATE)
 		{
@@ -303,11 +305,11 @@ void traverse_filter(pnode p, int from, int to, int opt)
 			tmp = (pnode)malloc(sizeof(node));
 			tmp->value = 1; tmp->id = p->id;
 			tmp->left = NULL; tmp->right = NULL;
-			filter_list = insert_node(filter_list, tmp, DEF_ID);
+			root_order = insert_node(root_order, tmp, DEF_ID);
 		}
 		else
 		{
-			pnode tmp = search_node(filter_list, p->id, DEF_ID);
+			pnode tmp = search_node(root_order, p->id, DEF_ID);
 			if (tmp != NULL)
 				tmp->value += 1;
 		}
@@ -323,25 +325,90 @@ void sort_age(int from, int to)
 	swap(from, to);
 	int type = AGE;
 
+	root_order = NULL;
+
 	//id가 value인 order list를 만든다.
 	traverse_filter(filter[type], from, to, DEF_CREATE);
 }
+
 void sort_pass(int from, int to)
 {
+	swap(from, to);
+	int type = PASS;
 
+	//id가 value인 order list를 만든다.
+	traverse_filter(filter[type], from, to, DEF_MODIFY);
 }
 void sort_eng(int from, int to)
 {
+	swap(from, to);
+	int type = ENG;
 
+	//id가 value인 order list를 만든다.
+	traverse_filter(filter[type], from, to, DEF_MODIFY);
 }
 void sort_pri(int from, int to)
-{}
+{
+	swap(from, to);
+	int type = PRI;
+
+	//id가 value인 order list를 만든다.
+	traverse_filter(filter[type], from, to, DEF_MODIFY);
+}
+
+void sell_car_node(pnode p)
+{
+	if (p == NULL)
+		return;
+	sell_car_node(p->left);
+
+	if (p->value == 4)
+		id_list[p->id] = gorder_idx;
+
+	sell_car_node(p->right);	
+}
 int sell_car()
 {
-	return 0;
+	sell_car_node(root_order);
+	order_list[gorder_idx] = root_order;
+
+	int ret = gorder_idx++;
+	return ret;
 }
+
+void refund_node(pnode p)
+{
+	if (p == NULL)
+		return;
+	sell_car_node(p->left);
+
+	if (p->value == 4)
+		id_list[p->id] = 0;
+
+	sell_car_node(p->right);
+}
+
+void delete_all_node(pnode p)
+{
+	if (p == NULL)
+		return;
+
+	delete_all_node(p->left);
+	delete_all_node(p->right);
+	free(p);
+}
+
 void refund(int order_no)
-{}
+{
+	pnode p = order_list[order_no];
+	refund_node(p);
+
+	for (int i = 1; i < gorder_idx; i++)
+		delete_all_node(order_list[i]);
+
+	gorder_idx = 1;
+}
+
 int empty_car()
 {
 	//delete_all(root_id);
