@@ -43,7 +43,7 @@ int main()
 			build_car(tmpCar);
 			buy_car(tmpCar);
 
-			if (rand() % 10 == 0)
+			if (rand() % 100 == 0)
 			{
 				sort_age(rand() % 21, rand() % 21);
 				sort_pass(rand() % 11 + 2, rand() % 11 + 2);
@@ -65,7 +65,7 @@ int main()
 			}
 		}
 
-		printf("TC#%d = %d", tc, empty_car());
+		printf("TC#%d = %d\n", tc, empty_car());
 	}
 
 	return 0;
@@ -229,41 +229,43 @@ void delete_all(pnode p)
 	free(p);
 }
 
-typedef enum FILTER
+typedef enum value_tree
 {
 	AGE = 1,
 	PASS,
 	ENG,
 	PRI,
-	MAX_FILTER,
+	MAX_VALUE_TREE,
 };
 
-pnode filter[MAX_FILTER] = { NULL, };
+pnode value_tree[MAX_VALUE_TREE] = { NULL, };
 int gidx = 1;
+
+//Car 의 상태, 팔리기 전0, 팔린 후 order number
 char id_list[10002] = { 0, };
 
 void buy_car(CAR car)
 {
-	pnode tmp[MAX_FILTER];
+	pnode tmp[MAX_VALUE_TREE];
 	tmp[AGE] = (pnode)malloc(sizeof(node));
 	tmp[AGE]->value = car.age; tmp[AGE]->id = gidx;
 	tmp[AGE]->left = NULL; tmp[AGE]->right = NULL;
-	filter[AGE] = insert_node(filter[AGE], tmp[AGE], DEF_VAL);
+	value_tree[AGE] = insert_node(value_tree[AGE], tmp[AGE], DEF_VAL);
 
 	tmp[PASS] = (pnode)malloc(sizeof(node));
 	tmp[PASS]->value = car.passenger; tmp[PASS]->id = gidx;
 	tmp[PASS]->left = NULL; tmp[PASS]->right = NULL;
-	filter[PASS] = insert_node(filter[PASS], tmp[PASS], DEF_VAL);
+	value_tree[PASS] = insert_node(value_tree[PASS], tmp[PASS], DEF_VAL);
 
 	tmp[ENG] = (pnode)malloc(sizeof(node));
 	tmp[ENG]->value = car.engine; tmp[ENG]->id = gidx;
 	tmp[ENG]->left = NULL; tmp[ENG]->right = NULL;
-	filter[ENG] = insert_node(filter[ENG], tmp[ENG], DEF_VAL);
+	value_tree[ENG] = insert_node(value_tree[ENG], tmp[ENG], DEF_VAL);
 
 	tmp[PRI] = (pnode)malloc(sizeof(node));
 	tmp[PRI]->value = car.price; tmp[PRI]->id = gidx;
 	tmp[PRI]->left = NULL; tmp[PRI]->right = NULL;
-	filter[PRI] = insert_node(filter[PRI], tmp[PRI], DEF_VAL);
+	value_tree[PRI] = insert_node(value_tree[PRI], tmp[PRI], DEF_VAL);
 
 	gidx++;
 }
@@ -284,17 +286,17 @@ enum tra_type
 	DEF_MODIFY,
 };
 
-pnode root_order = NULL;
+pnode new_order = NULL;
 pnode order_list[MC];
 int gorder_idx = 1;
-void traverse_filter(pnode p, int from, int to, int opt)
+void traverse_value_tree(pnode p, int from, int to, int opt)
 {
 	if (p == NULL)
 		return;
 
 	if (from < p->value)
 	{
-		traverse_filter(p->left, from, to, opt);
+		traverse_value_tree(p->left, from, to, opt);
 	}
 
 	if (from <= p->value && p->value <= to && id_list[p->id] == 0)
@@ -305,19 +307,22 @@ void traverse_filter(pnode p, int from, int to, int opt)
 			tmp = (pnode)malloc(sizeof(node));
 			tmp->value = 1; tmp->id = p->id;
 			tmp->left = NULL; tmp->right = NULL;
-			root_order = insert_node(root_order, tmp, DEF_ID);
+			new_order = insert_node(new_order, tmp, DEF_ID);
 		}
 		else
 		{
-			pnode tmp = search_node(root_order, p->id, DEF_ID);
+			pnode tmp = search_node(new_order, p->id, DEF_ID);
 			if (tmp != NULL)
+			{
 				tmp->value += 1;
+				tmp->value = tmp->value;
+			}
 		}
 	}
 
 	if (to >= p->value)
 	{
-		traverse_filter(p->right, from, to, opt);
+		traverse_value_tree(p->right, from, to, opt);
 	}
 }
 void sort_age(int from, int to)
@@ -325,10 +330,14 @@ void sort_age(int from, int to)
 	swap(from, to);
 	int type = AGE;
 
-	root_order = NULL;
+	pnode tmp;
+	tmp = (pnode)malloc(sizeof(node));
+	tmp->value = -1; tmp->id = 0;
+	tmp->left = NULL; tmp->right = NULL;
+	new_order = tmp;
 
 	//id가 value인 order list를 만든다.
-	traverse_filter(filter[type], from, to, DEF_CREATE);
+	traverse_value_tree(value_tree[type], from, to, DEF_CREATE);
 }
 
 void sort_pass(int from, int to)
@@ -337,7 +346,7 @@ void sort_pass(int from, int to)
 	int type = PASS;
 
 	//id가 value인 order list를 만든다.
-	traverse_filter(filter[type], from, to, DEF_MODIFY);
+	traverse_value_tree(value_tree[type], from, to, DEF_MODIFY);
 }
 void sort_eng(int from, int to)
 {
@@ -345,7 +354,7 @@ void sort_eng(int from, int to)
 	int type = ENG;
 
 	//id가 value인 order list를 만든다.
-	traverse_filter(filter[type], from, to, DEF_MODIFY);
+	traverse_value_tree(value_tree[type], from, to, DEF_MODIFY);
 }
 void sort_pri(int from, int to)
 {
@@ -353,7 +362,7 @@ void sort_pri(int from, int to)
 	int type = PRI;
 
 	//id가 value인 order list를 만든다.
-	traverse_filter(filter[type], from, to, DEF_MODIFY);
+	traverse_value_tree(value_tree[type], from, to, DEF_MODIFY);
 }
 
 void sell_car_node(pnode p)
@@ -369,11 +378,10 @@ void sell_car_node(pnode p)
 }
 int sell_car()
 {
-	sell_car_node(root_order);
-	order_list[gorder_idx] = root_order;
+	sell_car_node(new_order);
+	order_list[gorder_idx] = new_order;
 
-	int ret = gorder_idx++;
-	return ret;
+	return gorder_idx++;
 }
 
 void refund_node(pnode p)
@@ -402,16 +410,33 @@ void refund(int order_no)
 {
 	pnode p = order_list[order_no];
 	refund_node(p);
-
-	for (int i = 1; i < gorder_idx; i++)
-		delete_all_node(order_list[i]);
-
-	gorder_idx = 1;
 }
 
 int empty_car()
 {
-	//delete_all(root_id);
+	delete_all_node(value_tree[AGE]);
+	delete_all_node(value_tree[PASS]);
+	delete_all_node(value_tree[ENG]);
+	delete_all_node(value_tree[PRI]);
+	
+	value_tree[AGE] = NULL;
+	value_tree[PASS] = NULL;
+	value_tree[ENG] = NULL;
+	value_tree[PRI] = NULL;
 
-	return 0;
+	for (int i = 1; i < gorder_idx; i++)
+	{
+		delete_all_node(order_list[i]);
+		order_list[i] = NULL;
+	}
+
+	gorder_idx = 1;
+
+	int cnt = 0;
+	for (int i = 1; i <= 10000; i++)
+	{
+		if (id_list[i] == 0)
+			cnt++;
+	}
+	return cnt;
 }
