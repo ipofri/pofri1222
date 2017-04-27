@@ -115,6 +115,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "J.Subway.dijk.2097.170420",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "J.Shop.Gift.1117.170421", "J.Shop.Gift.1117.170421\J.Shop.Gift.1117.170421.vcxproj", "{419EEF9B-7286-415A-BF2D-EB4F695CB7DA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P.Cube", "P.Cube\P.Cube.vcxproj", "{9A4B42EA-275C-4B20-BF31-485B12FBA43B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -345,6 +347,10 @@ Global
 		{419EEF9B-7286-415A-BF2D-EB4F695CB7DA}.Debug|Win32.Build.0 = Debug|Win32
 		{419EEF9B-7286-415A-BF2D-EB4F695CB7DA}.Release|Win32.ActiveCfg = Release|Win32
 		{419EEF9B-7286-415A-BF2D-EB4F695CB7DA}.Release|Win32.Build.0 = Release|Win32
+		{9A4B42EA-275C-4B20-BF31-485B12FBA43B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9A4B42EA-275C-4B20-BF31-485B12FBA43B}.Debug|Win32.Build.0 = Debug|Win32
+		{9A4B42EA-275C-4B20-BF31-485B12FBA43B}.Release|Win32.ActiveCfg = Release|Win32
+		{9A4B42EA-275C-4B20-BF31-485B12FBA43B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
